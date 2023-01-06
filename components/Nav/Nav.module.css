@@ -1,0 +1,50 @@
+.nav {
+	display: flex;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	align-items: center;
+	max-width: 1100px;
+	gap: 20px;
+}
+
+.connectWalletContainer {
+	max-width: 350px;
+}
+
+.siteName {
+	font-size: 24px;
+	font-weight: 400;
+}
+
+.right {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+	margin-left: auto;
+}
+
+@media (max-width: 900px) {
+	.nav,
+	.right {
+		flex-direction: column;
+	}
+
+	.right {
+		margin-left: 0;
+		margin-top: 20px;
+	}
+}
+
+.linkButton {
+	padding: 12px 24px;
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+	border-radius: 8px;
+	font-size: 16px;
+	font-weight: 400;
+	transition: box-shadow 300ms ease;
+}
+
+.linkButton:hover {
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
+}

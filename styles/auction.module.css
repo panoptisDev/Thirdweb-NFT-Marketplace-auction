@@ -1,0 +1,116 @@
+.formGrid {
+	display: grid;
+	grid-template-columns: 600px auto;
+	gap: 40px;
+	margin: 0 auto;
+	max-width: 1100px;
+	margin-top: 100px;
+	margin-bottom: 100px;
+}
+
+.form label {
+	display: block;
+	margin-bottom: 26px;
+}
+
+.form label span {
+	display: block;
+	margin-bottom: 14px;
+}
+
+.form input {
+	display: block;
+	width: 100%;
+	padding: 12px 16px;
+	margin-bottom: 0.5rem;
+	background: transparent;
+	border: none;
+	font-size: 16px;
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+	border-radius: 8px;
+}
+
+.rowGroup {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 20px;
+}
+
+.form fieldset {
+	border: none !important;
+}
+
+.form legend {
+	font-size: 16px;
+	margin-bottom: 1rem;
+}
+
+.sectionTitle {
+	margin-bottom: 30px;
+	font-size: 30px;
+}
+
+.form .sectionTitle {
+	font-size: 24px;
+	text-align: left;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	color: var(--accents-3);
+}
+
+.spacer {
+	height: 30px;
+}
+
+.colGroup label {
+	margin-bottom: 12px;
+}
+
+.createAuctionBtn {
+	color: black !important;
+	background: white !important;
+	font-family: inherit !important;
+	padding: 20px !important;
+	justify-content: space-between !important;
+}
+
+.assetPreview {
+	width: 100%;
+	border-radius: 8px;
+}
+
+.imgLoading {
+	aspect-ratio: 1/1;
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+	background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+	background-size: 400%;
+	animation: loading 2s infinite linear;
+	border-radius: 8px;
+}
+
+@keyframes loading {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: -400% 0;
+	}
+}
+
+.notFound {
+	aspect-ratio: 1/1;
+	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
+	border-radius: 8px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 30px;
+}
+
+.assetName {
+	font-size: 24px;
+	margin-bottom: 12px;
+	margin-top: 20px;
+	text-align: center;
+}

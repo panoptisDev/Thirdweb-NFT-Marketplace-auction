@@ -1,0 +1,112 @@
+.listingContainer {
+	max-width: 1100px;
+	margin: 0 auto;
+	margin-top: 100px;
+	display: grid;
+	grid-template-columns: 1fr 450px;
+	gap: 40px;
+}
+
+@media (max-width: 900px) {
+	.listingContainer {
+		grid-template-columns: 1fr;
+		padding: 20px;
+	}
+}
+
+.assetName {
+	font-size: 50px;
+	margin-bottom: 10px;
+}
+
+.priceSection {
+	margin-bottom: 30px;
+	box-shadow: 0 0 4px rgba(255, 255, 255, 0.5);
+	padding: 14px;
+	border-radius: 8px;
+}
+
+.ownerAddress {
+	margin-bottom: 40px;
+}
+
+.address {
+	font-family: monospace;
+	font-style: normal;
+	font-size: 16px;
+	display: inline-block;
+	background: rgba(255, 255, 255, 0.1);
+	padding: 4px;
+	border-radius: 4px;
+	margin-left: 4px;
+	font-size: 12px;
+	color: rgba(255, 255, 255, 0.6);
+	margin-left: 10px;
+}
+
+.price {
+	font-size: 30px;
+	margin-bottom: 14px;
+}
+
+.floorPrice {
+	font-size: 16px;
+	margin-bottom: 8px;
+}
+
+.floorPrice span {
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.buyButton,
+.offerButton {
+	background-color: white !important;
+	color: black !important;
+
+	justify-content: space-between !important;
+}
+
+.buyButton {
+	margin-bottom: 14px;
+}
+
+.offerButton {
+	margin-bottom: 30px;
+}
+
+.offerContainer input {
+	width: 100%;
+	padding: 14px 16px;
+	background-color: transparent;
+	box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
+	border-radius: 8px;
+	font-size: 16px;
+	margin-bottom: 12px;
+	border: none;
+}
+
+.offerContainer input::placeholder {
+	color: white;
+}
+
+.orSeperator {
+	font-size: 16px;
+	color: rgba(255, 255, 255, 0.5);
+	margin-top: 10px;
+	text-align: center;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	text-align: center;
+	padding-right: 10px;
+}
+
+.assetImg {
+	border-radius: 8px;
+}
+
+.priceLabel {
+	color: rgba(255, 255, 255, 0.7);
+	display: inline-block;
+	margin-right: 8px;
+	min-width: 100px;
+}
