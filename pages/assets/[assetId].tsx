@@ -11,6 +11,12 @@ import { marketplaceContractAddress } from '../../constants';
 import { shortenAddress } from '../../lib/shortenAddress';
 import styles from '../../styles/Asset.module.css';
 
+const epochSecondsToDate = (epochSeconds: number) => {
+	const date = new Date(0);
+	date.setUTCSeconds(epochSeconds);
+	return date;
+};
+
 type Query = { assetId: string };
 
 const ListingPage: NextPage = () => {
@@ -131,6 +137,19 @@ const ListingPage: NextPage = () => {
 					{winningBid.error ? <p className={styles.highestBid}> No Bids made yet </p> : ''}
 				</div>
 
+				<div className={styles.auctionEnd}>
+					{listing && 'endTimeInEpochSeconds' in listing ? (
+						<p>
+							Auction Ends at{' '}
+							{epochSecondsToDate(
+								ethers.BigNumber.from(listing.endTimeInEpochSeconds).toNumber()
+							).toLocaleString()}
+						</p>
+					) : (
+						<Skeleton width='350px' height='20px' />
+					)}
+				</div>
+
 				<Web3Button
 					className={styles.buyButton}
 					action={buyOut}
@@ -143,10 +162,10 @@ const ListingPage: NextPage = () => {
 
 				<div className={styles.offerContainer}>
 					<input
-						type='text'
+						type='number'
 						className={styles.offerInput}
 						onChange={e => setBidAmount(e.target.value)}
-						placeholder='Counter Offer'
+						placeholder='Offer'
 					/>
 
 					<Web3Button

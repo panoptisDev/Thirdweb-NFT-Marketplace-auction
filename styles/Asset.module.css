@@ -86,7 +86,7 @@
 }
 
 .offerContainer input::placeholder {
-	color: white;
+	color: rgba(255, 255, 255, 0.7);
 }
 
 .orSeperator {
@@ -109,4 +109,8 @@
 	display: inline-block;
 	margin-right: 8px;
 	min-width: 100px;
+}
+
+.auctionEnd {
+	margin-bottom: 20px;
 }
