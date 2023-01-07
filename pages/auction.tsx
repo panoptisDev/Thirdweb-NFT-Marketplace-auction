@@ -3,7 +3,6 @@ import { useContract, useNFT, useSDK, Web3Button } from '@thirdweb-dev/react';
 import { NATIVE_TOKEN_ADDRESS } from '@thirdweb-dev/sdk';
 import { useForm } from 'react-hook-form';
 import { Aurora } from '../components/Aurora/Aurora';
-import { ClientOnly } from '../components/ClientOnly';
 import { Skeleton } from '../components/Skeleton/Skeleton';
 import { marketplaceContractAddress } from '../constants';
 import styles from '../styles/auction.module.css';
@@ -131,35 +130,33 @@ export default function AuctionListingForm() {
 					</Web3Button>
 				</form>
 
-				<ClientOnly>
-					<div>
-						{nftQuery.isLoading && !nftContractQuery.error && (
-							<>
-								<Skeleton aspectRatio='1/1' />
-								<Skeleton width='50%' height='30px' margin='30px auto 0 auto' />
-							</>
-						)}
+				<div>
+					{nftQuery.isLoading && !nftContractQuery.error && (
+						<>
+							<Skeleton aspectRatio='1/1' />
+							<Skeleton width='50%' height='30px' margin='30px auto 0 auto' />
+						</>
+					)}
 
-						{nftQuery.data && nftQuery.data.metadata.image && (
-							<img
-								className={styles.assetPreview}
-								src={nftQuery.data.metadata.image as string}
-								alt=''
-								height={460}
-							/>
-						)}
+					{nftQuery.data && nftQuery.data.metadata.image && (
+						<img
+							className={styles.assetPreview}
+							src={nftQuery.data.metadata.image as string}
+							alt=''
+							height={460}
+						/>
+					)}
 
-						{(nftQuery.data && !nftQuery.data.metadata.image) || nftContractQuery.error ? (
-							<div className={styles.notFound}> NFT Not Found </div>
-						) : null}
+					{(nftQuery.data && !nftQuery.data.metadata.image) || nftContractQuery.error ? (
+						<div className={styles.notFound}> NFT Not Found </div>
+					) : null}
 
-						{nftQuery.data && (
-							<div>
-								<p className={styles.assetName}> {nftQuery.data.metadata.name} </p>
-							</div>
-						)}
-					</div>
-				</ClientOnly>
+					{nftQuery.data && (
+						<div>
+							<p className={styles.assetName}> {nftQuery.data.metadata.name} </p>
+						</div>
+					)}
+				</div>
 			</div>
 		</div>
 	);
