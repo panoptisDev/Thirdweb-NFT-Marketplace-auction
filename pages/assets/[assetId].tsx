@@ -31,8 +31,6 @@ const ListingPage: NextPage = () => {
 	const winningBid = useWinningBid(marketplaceContractQuery.contract, assetId);
 	const [bidAmount, setBidAmount] = useState<string>('');
 
-	console.log('listing', listing);
-
 	async function createBidOrOffer() {
 		try {
 			// If the listing type is a direct listing, then we can create an offer.

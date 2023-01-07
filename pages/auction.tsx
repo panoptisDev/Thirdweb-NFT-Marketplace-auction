@@ -23,8 +23,6 @@ export default function AuctionListingForm() {
 
 	const nftContractQuery = useContract(watch('nftContractAddress'));
 	const nftQuery = useNFT(nftContractQuery.contract, watch('tokenId'));
-	console.log(nftQuery);
-
 	const marketplaceContractQuery = useContract(marketplaceContractAddress, 'marketplace');
 
 	async function createAuctionListing() {
@@ -37,19 +35,6 @@ export default function AuctionListingForm() {
 		const d2 = new Date(watch('endDate') + ', ' + watch('endTime'));
 		// get diff in seconds
 		const diff = (d2.getTime() - d1.getTime()) / 1000;
-
-		console.log({
-			assetContractAddress: watch('nftContractAddress'),
-			buyoutPricePerToken: watch('buyoutPrice'),
-			currencyContractAddress: NATIVE_TOKEN_ADDRESS,
-			listingDurationInSeconds: diff,
-			quantity: 1,
-			reservePricePerToken: watch('floorPrice'),
-			startTimestamp: startTimestamp,
-			tokenId: watch('tokenId'),
-		});
-
-		debugger;
 
 		try {
 			const transaction = await marketplaceContract.auction.createListing({
@@ -69,8 +54,6 @@ export default function AuctionListingForm() {
 		}
 	}
 
-	console.log(nftQuery.data);
-
 	return (
 		<div className={styles.formGrid}>
 			<Aurora
@@ -79,12 +62,7 @@ export default function AuctionListingForm() {
 				color='hsl(0deg 0% 50% / 15%)'
 			/>
 
-			<form
-				className={styles.form}
-				onSubmit={handleSubmit(data => {
-					console.log('data');
-				})}
-			>
+			<form className={styles.form} onSubmit={handleSubmit(() => {})}>
 				<fieldset>
 					<legend className={styles.sectionTitle}> What </legend>
 
