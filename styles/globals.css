@@ -28,17 +28,12 @@ body {
 	background: var(--bg);
 	padding-bottom: 10px;
 	font-feature-settings: 'tnum' on, 'lnum' on;
+	color: white;
 }
 
 a {
 	color: inherit;
 	text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
-	html {
-		color-scheme: dark;
-	}
 }
 
 img {
