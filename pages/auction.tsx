@@ -4,6 +4,7 @@ import { NATIVE_TOKEN_ADDRESS } from '@thirdweb-dev/sdk';
 import { useForm } from 'react-hook-form';
 import { Aurora } from '../components/Aurora/Aurora';
 import { ClientOnly } from '../components/ClientOnly';
+import { Skeleton } from '../components/Skeleton/Skeleton';
 import { marketplaceContractAddress } from '../constants';
 import styles from '../styles/auction.module.css';
 
@@ -133,7 +134,10 @@ export default function AuctionListingForm() {
 			<ClientOnly>
 				<div>
 					{nftQuery.isLoading && !nftContractQuery.error && (
-						<div className={styles.imgLoading}></div>
+						<>
+							<Skeleton aspectRatio='1/1' />
+							<Skeleton width='50%' height='30px' margin='30px auto 0 auto' />
+						</>
 					)}
 
 					{nftQuery.data && nftQuery.data.metadata.image && (
@@ -141,7 +145,7 @@ export default function AuctionListingForm() {
 							className={styles.assetPreview}
 							src={nftQuery.data.metadata.image as string}
 							alt=''
-							width={380}
+							height={460}
 						/>
 					)}
 

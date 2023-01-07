@@ -17,8 +17,6 @@ export function Skeleton(props: SkeletonProps) {
 				width: props.width,
 				margin: props.margin,
 			}}
-		>
-			{' '}
-		</div>
+		></div>
 	);
 }

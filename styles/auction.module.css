@@ -87,24 +87,6 @@
 	border-radius: 8px;
 }
 
-.imgLoading {
-	aspect-ratio: 1/1;
-	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);
-	background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
-	background-size: 400%;
-	animation: loading 2s infinite linear;
-	border-radius: 8px;
-}
-
-@keyframes loading {
-	0% {
-		background-position: 0 0;
-	}
-	100% {
-		background-position: -400% 0;
-	}
-}
-
 .notFound {
 	aspect-ratio: 1/1;
 	box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2);

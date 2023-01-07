@@ -38,31 +38,6 @@ export function Listings() {
 											{listing.buyoutCurrencyValuePerToken.displayValue}{' '}
 											{listing.buyoutCurrencyValuePerToken.symbol}
 										</p>
-
-										{/* {'reservePriceCurrencyValuePerToken' in listing && (
-										<p>
-											Reserve price :{listing.reservePriceCurrencyValuePerToken.displayValue}
-											{listing.buyoutCurrencyValuePerToken.symbol}
-										</p>
-									)}
-
-									{'endTimeInEpochSeconds' in listing && (
-										<p>
-											End Time:
-											{new Date(
-												BigNumber.from(listing.endTimeInEpochSeconds).toNumber()
-											).toLocaleString()}{' '}
-										</p>
-									)}
-
-									{'startTimeInEpochSeconds' in listing && (
-										<p>
-											Start Time:
-											{new Date(
-												BigNumber.from(listing.startTimeInEpochSeconds).toNumber()
-											).toLocaleString()}{' '}
-										</p>
-									)} */}
 									</div>
 								</div>
 							);
