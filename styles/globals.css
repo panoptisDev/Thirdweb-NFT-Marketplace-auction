@@ -43,3 +43,12 @@ button {
 	font-family: 'Syne', sans-serif !important;
 	color: white;
 }
+
+input {
+	color-scheme: dark;
+}
+
+.container {
+	max-width: 1100px;
+	margin: 0 auto;
+}

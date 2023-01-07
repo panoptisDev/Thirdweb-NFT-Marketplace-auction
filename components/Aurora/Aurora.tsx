@@ -1,10 +1,10 @@
 import styles from './Aurora.module.css';
 
-interface AuroraProps {
+type AuroraProps = {
 	size: { width: string; height: string };
 	pos: { top: string; left: string };
 	color: string;
-}
+};
 
 export const Aurora: React.FC<AuroraProps> = ({ color, pos, size }) => {
 	return (

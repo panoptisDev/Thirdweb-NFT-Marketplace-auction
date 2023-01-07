@@ -1,11 +1,44 @@
 /* eslint-disable @next/next/no-img-element */
 import { useActiveListings, useContract } from '@thirdweb-dev/react';
-import styles from './Listings.module.css';
+import styles from './Listings.module.scss';
 import { marketplaceContractAddress } from '../../constants';
 import { useRouter } from 'next/router';
-import { ListingItemSkeleton } from './ListingItemSkeleton';
+import { Skeleton } from '../Skeleton/Skeleton';
 
-const Skeletons = new Array(8).fill(0).map((_, i) => <ListingItemSkeleton key={i} />);
+type ListingCardProps = {
+	onClick: () => void;
+	img: string;
+	name: string;
+	price: string;
+};
+
+function ListingCard(props: ListingCardProps) {
+	return (
+		<div className={styles.listingCard} onClick={props.onClick}>
+			<div className={styles.assetImgContainer}>
+				<img src={props.img} alt='' />
+			</div>
+			<div className={styles.listingCardInfo}>
+				<p className={styles.assetName}>{props.name}</p>
+				<p className={styles.assetPrice}>{props.price}</p>
+			</div>
+		</div>
+	);
+}
+
+export function ListingCardSkeleton() {
+	return (
+		<div className={styles.listingCardSkeleton}>
+			<Skeleton height='300px' />
+			<div className={styles.info}>
+				<Skeleton height='20px' margin='0 0 10px 0' width='80%' />
+				<Skeleton height='20px' width='30%' />
+			</div>
+		</div>
+	);
+}
+
+const ListingsSkeleton = new Array(8).fill(0).map((_, i) => <ListingCardSkeleton key={i} />);
 
 export function Listings() {
 	const router = useRouter();
@@ -17,29 +50,16 @@ export function Listings() {
 			<h2 className={styles.listingSectionTitle}> NFTs on Auction </h2>
 			<div className={styles.listingGrid}>
 				{activeListingsQuery.isLoading
-					? Skeletons
+					? ListingsSkeleton
 					: activeListingsQuery.data?.map(listing => {
 							return (
-								<div
+								<ListingCard
 									key={listing.asset.id}
-									className={styles.listingCard}
 									onClick={() => router.push(`/assets/${listing.id}`)}
-								>
-									<div className={styles.assetImgContainer}>
-										<img src={listing.asset.image as string} alt='' />
-									</div>
-
-									<div className={styles.listingCardInfo}>
-										<p className={styles.assetName}>{listing.asset.name}</p>
-										{/* <p className={styles.assetId}>#{listing.asset.id}</p> */}
-										{/* <p> Seller : {listing.sellerAddress}</p> */}
-										<p className={styles.assetPrice}>
-											{' '}
-											{listing.buyoutCurrencyValuePerToken.displayValue}{' '}
-											{listing.buyoutCurrencyValuePerToken.symbol}
-										</p>
-									</div>
-								</div>
+									img={listing.asset.image as string}
+									name={listing.asset.name as string}
+									price={`${listing.buyoutCurrencyValuePerToken.displayValue} ${listing.buyoutCurrencyValuePerToken.symbol}`}
+								/>
 							);
 					  })}
 			</div>

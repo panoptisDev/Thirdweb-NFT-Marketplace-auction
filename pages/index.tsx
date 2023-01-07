@@ -7,14 +7,14 @@ export default function Home() {
 	return (
 		<>
 			<Head>
-				<title>Marketplace</title>
+				<title>NFT Marketplace</title>
 				<meta name='description' content='Mint, Buy and Sell NFTs' />
 				<meta name='viewport' content='width=device-width, initial-scale=1' />
 				<link rel='icon' href='/favicon.ico' />
 			</Head>
 
 			<div>
-				<div className={commonStyles.containerLg}>
+				<div className='container'>
 					<main>
 						<Aurora
 							size={{ width: '2200px', height: '2200px' }}

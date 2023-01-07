@@ -1,21 +1,26 @@
 import { ConnectWallet } from '@thirdweb-dev/react';
 import Link from 'next/link';
-import styles from './Nav.module.css';
+import styles from './Nav.module.scss';
 
 export function Nav() {
 	return (
-		<nav className={styles.nav}>
-			<Link href='/' className={styles.siteName}>
-				Marketplace
-			</Link>
-			<div className={styles.right}>
-				<Link href='/auction' className={styles.linkButton}>
-					Create Auction
+		<div className='container'>
+			<nav className={styles.nav}>
+				{/* Left */}
+				<Link href='/' className={styles.homeLink}>
+					NFT Marketplace
 				</Link>
-				<div className={styles.connectWalletContainer}>
-					<ConnectWallet />
+
+				{/* Right */}
+				<div className={styles.navRight}>
+					<Link href='/auction' className={styles.buttonLink}>
+						Create Auction
+					</Link>
+					<div className={styles.connectWalletContainer}>
+						<ConnectWallet />
+					</div>
 				</div>
-			</div>
-		</nav>
+			</nav>
+		</div>
 	);
 }

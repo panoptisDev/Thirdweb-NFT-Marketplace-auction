@@ -34,15 +34,14 @@ export default function AuctionListingForm() {
 
 		const d1 = new Date(watch('startDate') + ', ' + watch('startTime'));
 		const d2 = new Date(watch('endDate') + ', ' + watch('endTime'));
-		// get diff in seconds
-		const diff = (d2.getTime() - d1.getTime()) / 1000;
+		const listingDurationInSeconds = (d2.getTime() - d1.getTime()) / 1000;
 
 		try {
 			const transaction = await marketplaceContract.auction.createListing({
 				assetContractAddress: watch('nftContractAddress'),
 				buyoutPricePerToken: watch('buyoutPrice'),
 				currencyContractAddress: NATIVE_TOKEN_ADDRESS,
-				listingDurationInSeconds: diff,
+				listingDurationInSeconds,
 				quantity: 1,
 				reservePricePerToken: watch('floorPrice'),
 				startTimestamp: startTimestamp,
@@ -56,110 +55,112 @@ export default function AuctionListingForm() {
 	}
 
 	return (
-		<div className={styles.formGrid}>
-			<Aurora
-				size={{ width: '2400px', height: '2400px' }}
-				pos={{ left: '70%', top: '30%' }}
-				color='hsl(0deg 0% 50% / 15%)'
-			/>
+		<div className='container'>
+			<div className={styles.formGrid}>
+				<Aurora
+					size={{ width: '2400px', height: '2400px' }}
+					pos={{ left: '70%', top: '30%' }}
+					color='hsl(0deg 0% 50% / 15%)'
+				/>
 
-			<form className={styles.form} onSubmit={handleSubmit(() => {})}>
-				<fieldset>
-					<legend className={styles.sectionTitle}> What </legend>
+				<form className={styles.form} onSubmit={handleSubmit(() => {})}>
+					<fieldset>
+						<legend className={styles.sectionTitle}> What </legend>
 
-					<label>
-						<span> NFT Contract Address </span>
-						<input type='text' {...register('nftContractAddress')} />
-					</label>
-
-					<label>
-						<span> Token Id </span>
-						<input type='text' {...register('tokenId')} />
-					</label>
-				</fieldset>
-
-				<div className={styles.spacer}></div>
-
-				<fieldset className={styles.rowGroup}>
-					<legend className={styles.sectionTitle}> When </legend>
-
-					<fieldset className={styles.colGroup}>
-						<legend> Auction Starts on </legend>
 						<label>
-							<input type='date' {...register('startDate')} aria-label='Auction Start Day' />
+							<span> NFT Contract Address </span>
+							<input type='text' {...register('nftContractAddress')} />
 						</label>
 
 						<label>
-							<input type='time' {...register('startTime')} aria-label='Auction Start Time' />
+							<span> Token Id </span>
+							<input type='text' {...register('tokenId')} />
 						</label>
 					</fieldset>
 
-					<fieldset className={styles.colGroup}>
-						<legend> Auction Ends on </legend>
+					<div className={styles.spacer}></div>
+
+					<fieldset className={styles.rowGroup}>
+						<legend className={styles.sectionTitle}> When </legend>
+
+						<fieldset className={styles.colGroup}>
+							<legend> Auction Starts on </legend>
+							<label>
+								<input type='date' {...register('startDate')} aria-label='Auction Start Day' />
+							</label>
+
+							<label>
+								<input type='time' {...register('startTime')} aria-label='Auction Start Time' />
+							</label>
+						</fieldset>
+
+						<fieldset className={styles.colGroup}>
+							<legend> Auction Ends on </legend>
+							<label>
+								<input type='date' {...register('endDate')} aria-label='Auction End Date' />
+							</label>
+
+							<label>
+								<input type='time' {...register('endTime')} aria-label='Auction End Time' />
+							</label>
+						</fieldset>
+					</fieldset>
+
+					<div className={styles.spacer}></div>
+
+					<fieldset>
+						<legend className={styles.sectionTitle}> Price </legend>
+
 						<label>
-							<input type='date' {...register('endDate')} aria-label='Auction End Date' />
+							<span> Floor Price </span>
+							<input type='number' step={0.00000000001} {...register('floorPrice')} />
 						</label>
 
 						<label>
-							<input type='time' {...register('endTime')} aria-label='Auction End Time' />
+							<span> Buyout Price </span>
+							<input type='number' step={0.00000000001} {...register('buyoutPrice')} />
 						</label>
 					</fieldset>
-				</fieldset>
 
-				<div className={styles.spacer}></div>
+					<Web3Button
+						action={createAuctionListing}
+						contractAddress={marketplaceContractAddress}
+						className={styles.createAuctionBtn}
+					>
+						Create Auction
+					</Web3Button>
+				</form>
 
-				<fieldset>
-					<legend className={styles.sectionTitle}> Price </legend>
+				<ClientOnly>
+					<div>
+						{nftQuery.isLoading && !nftContractQuery.error && (
+							<>
+								<Skeleton aspectRatio='1/1' />
+								<Skeleton width='50%' height='30px' margin='30px auto 0 auto' />
+							</>
+						)}
 
-					<label>
-						<span> Floor Price </span>
-						<input type='text' step={0.00000000001} {...register('floorPrice')} />
-					</label>
+						{nftQuery.data && nftQuery.data.metadata.image && (
+							<img
+								className={styles.assetPreview}
+								src={nftQuery.data.metadata.image as string}
+								alt=''
+								height={460}
+							/>
+						)}
 
-					<label>
-						<span> Buyout Price </span>
-						<input type='text' step={0.00000000001} {...register('buyoutPrice')} />
-					</label>
-				</fieldset>
+						{(nftQuery.data && !nftQuery.data.metadata.image) || nftContractQuery.error ? (
+							<div className={styles.notFound}> NFT Not Found </div>
+						) : null}
 
-				<Web3Button
-					action={createAuctionListing}
-					contractAddress={marketplaceContractAddress}
-					className={styles.createAuctionBtn}
-				>
-					Create Auction
-				</Web3Button>
-			</form>
-
-			<ClientOnly>
-				<div>
-					{nftQuery.isLoading && !nftContractQuery.error && (
-						<>
-							<Skeleton aspectRatio='1/1' />
-							<Skeleton width='50%' height='30px' margin='30px auto 0 auto' />
-						</>
-					)}
-
-					{nftQuery.data && nftQuery.data.metadata.image && (
-						<img
-							className={styles.assetPreview}
-							src={nftQuery.data.metadata.image as string}
-							alt=''
-							height={460}
-						/>
-					)}
-
-					{(nftQuery.data && !nftQuery.data.metadata.image) || nftContractQuery.error ? (
-						<div className={styles.notFound}> NFT Not Found </div>
-					) : null}
-
-					{nftQuery.data && (
-						<div>
-							<p className={styles.assetName}> {nftQuery.data.metadata.name} </p>
-						</div>
-					)}
-				</div>
-			</ClientOnly>
+						{nftQuery.data && (
+							<div>
+								<p className={styles.assetName}> {nftQuery.data.metadata.name} </p>
+							</div>
+						)}
+					</div>
+				</ClientOnly>
+			</div>
 		</div>
 	);
 }

@@ -1,4 +1,4 @@
-import styles from './Skeleton.module.css';
+import styles from './Skeleton.module.scss';
 
 type SkeletonProps = {
 	height?: string;
@@ -7,6 +7,9 @@ type SkeletonProps = {
 	margin?: string;
 };
 
+/**
+ * Rectangle with Loading animation to create a Skeleton
+ */
 export function Skeleton(props: SkeletonProps) {
 	return (
 		<div

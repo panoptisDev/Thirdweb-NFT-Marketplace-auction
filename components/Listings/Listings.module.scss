@@ -1,0 +1,74 @@
+.listingSection {
+	margin: 100px 0;
+
+	@media (max-width: 900px) {
+		padding: 20px;
+	}
+
+	.listingSectionTitle {
+		font-size: 32px;
+		font-weight: 700;
+	}
+}
+
+.listingGrid {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr;
+	gap: 40px 20px;
+	padding-top: 20px;
+
+	@media (max-width: 800px) {
+		grid-template-columns: 1fr;
+	}
+}
+
+.listingCard {
+	border-radius: 8px;
+	cursor: pointer;
+	overflow: hidden;
+	box-shadow: 0 0 0 1px hsl(0deg 0% 100% / 15%);
+
+	img {
+		height: 100%;
+		width: 100%;
+		object-fit: cover !important;
+		transition: 200ms ease;
+	}
+
+	&:hover img {
+		transform: scale(1.1);
+	}
+
+	.assetImgContainer {
+		height: 300px;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.assetName {
+		color: var(--accents-2);
+		font-size: 14px;
+		margin-bottom: 14px;
+	}
+
+	.assetPrice {
+		font-size: 16px;
+		color: var(--accents-3);
+	}
+
+	.listingCardInfo {
+		padding: 16px;
+	}
+}
+
+.listingCardSkeleton {
+	height: 382px;
+	border-radius: 8px;
+	cursor: pointer;
+	overflow: hidden;
+	box-shadow: 0 0 0 1px hsl(0deg 0% 100% / 15%);
+
+	.info {
+		padding: 14px;
+	}
+}
